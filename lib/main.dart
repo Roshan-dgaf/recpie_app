@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recpie_app/Screen/registration_screen.dart';
-import 'package:recpie_app/app_utils.dart';
 
 
 void main() {
