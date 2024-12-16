@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:recpie_app/Screen/dashboard_screen.dart';
 import 'package:recpie_app/app_utils.dart';
 import 'package:recpie_app/widgets/input_field_widget.dart';
 
@@ -11,18 +12,18 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController birthDatecontroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController birthDateController = TextEditingController();
 
   String genderSelected = "male";
 
   void handleSubmit() {
-    String name = namecontroller.text;
-    String email = emailcontroller.text;
-    String password = passwordcontroller.text;
-    String birthDate = birthDatecontroller.text;
+    String name = nameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+    String birthDate = birthDateController.text;
     String gender = genderSelected;
 
     if (name.isEmpty || email.isEmpty || password.isEmpty || birthDate.isEmpty) {
@@ -66,7 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 const SizedBox(height: 8.0),
                 const Center(
                   child: Text(
-                    "Register for Recpies",
+                    "Register for Recipes",
                     style: TextStyle(
                       color: colorWhite,
                       fontSize: 28.0,
@@ -89,19 +90,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 const SizedBox(height: 50),
                 Inputfield(
-                  controller: namecontroller,
+                  controller: nameController,
                   icon: Icons.person,
                   hintText: "Enter your name",
                 ),
                 const SizedBox(height: 25),
                 Inputfield(
-                  controller: emailcontroller,
+                  controller: emailController,
                   icon: Icons.email,
                   hintText: "Enter your email",
                 ),
                 const SizedBox(height: 25),
                 Inputfield(
-                  controller: passwordcontroller,
+                  controller: passwordController,
                   icon: Icons.password,
                   hintText: "Enter your password",
                   obscureText: true,
@@ -115,7 +116,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       fontFamily: "Montserrat",
                     ),
                     textAlign: TextAlign.center,
-                    controller: birthDatecontroller,
+                    controller: birthDateController,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(
                         Icons.calendar_month,
@@ -148,7 +149,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       String dateFormatter = date.toIso8601String();
                       DateTime dt = DateTime.parse(dateFormatter);
                       var formatter = DateFormat("dd-MMM-yyyy");
-                      birthDatecontroller.text = formatter.format(dt);
+                      birthDateController.text = formatter.format(dt);
                     },
                   ),
                 ),
@@ -254,16 +255,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
-                        );
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: const Text(
                         "Login",
                         style: TextStyle(
-                          color: colorPrimary,
+                          color: colorGreen,
                           fontSize: 14,
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.bold,
@@ -274,113 +271,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
-    void handleLogin() {
-      String email = emailController.text;
-      String password = passwordController.text;
-
-      if (email.isEmpty || password.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Email and Password are required!"),
-            backgroundColor: Colors.red,
-          ),
-        );
-        return;
-      }
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
-      );
-    }
-
-    return Scaffold(
-      backgroundColor: colorPrimary,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Login",
-              style: TextStyle(
-                color: colorWhite,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Inputfield(
-              controller: emailController,
-              icon: Icons.email,
-              hintText: "Enter your email",
-            ),
-            const SizedBox(height: 20),
-            Inputfield(
-              controller: passwordController,
-              icon: Icons.password,
-              hintText: "Enter your password",
-              obscureText: true,
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: handleLogin,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorPrimary,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 50, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-              child: const Text(
-                "Login",
-                style: TextStyle(
-                  color: colorWhite,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dashboard"),
-        backgroundColor: colorPrimary,
-      ),
-      body: const Center(
-        child: Text(
-          "Welcome to the Dashboard!",
-          style: TextStyle(
-            color: colorPrimary,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),
