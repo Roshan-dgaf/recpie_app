@@ -26,7 +26,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     String birthDate = birthDateController.text;
     String gender = genderSelected;
 
-    if (name.isEmpty || email.isEmpty || password.isEmpty || birthDate.isEmpty) {
+    if (name.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        birthDate.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("All fields are required!"),
@@ -254,7 +257,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   onPressed: handleSubmit,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colorGreen,
-                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),

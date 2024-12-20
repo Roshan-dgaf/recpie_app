@@ -17,7 +17,6 @@ class Inputfield extends StatelessWidget {
   final bool obscureText;
   final double borderRadius; // Store the borderRadius value
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,10 +25,7 @@ class Inputfield extends StatelessWidget {
         keyboardType: TextInputType.emailAddress,
         obscureText: obscureText,
         controller: controller,
-        style: const TextStyle(
-          color: colorWhite,
-          fontFamily: "Montserrat"
-        ),
+        style: const TextStyle(color: colorWhite, fontFamily: "Montserrat"),
         textAlign: TextAlign.center,
         cursorColor: colorWhite,
         decoration: InputDecoration(
@@ -39,21 +35,10 @@ class Inputfield extends StatelessWidget {
             color: colorWhite,
             size: 25.0,
           ),
-          focusColor: colorWhite,
+          focusColor: Colors.blue,
           hintText: hintText,
           hintStyle: const TextStyle(
-            color: colorGrey,
-            fontSize: 12.0,
-            fontFamily: "Montserrat"
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: const BorderSide(color: colorWhite),
-            borderRadius: BorderRadius.circular(borderRadius), // Apply borderRadius here
-          ),
-          border: UnderlineInputBorder(
-            borderSide: const BorderSide(color: colorWhite),
-            borderRadius: BorderRadius.circular(borderRadius), // Apply borderRadius here
-          ),
+              color: colorGrey, fontSize: 12.0, fontFamily: "Montserrat"),
           contentPadding: const EdgeInsets.only(top: 15.0),
         ),
       ),

@@ -70,7 +70,8 @@ class LoginScreen extends StatelessWidget {
                 onPressed: handleLogin,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorGreen,
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -92,14 +93,16 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.g_mobiledata, color: colorWhite, size: 30),
+                    icon: const Icon(Icons.g_mobiledata,
+                        color: colorWhite, size: 30),
                     onPressed: () {
                       // Add Google login functionality
                     },
                   ),
                   const SizedBox(width: 20),
                   IconButton(
-                    icon: const Icon(Icons.facebook, color: colorWhite, size: 30),
+                    icon:
+                        const Icon(Icons.facebook, color: colorWhite, size: 30),
                     onPressed: () {
                       // Add Facebook login functionality
                     },

@@ -64,6 +64,9 @@ flutter:
     - assets/p.jpg
     - assets/onboarding2.jpg
     - assets/onboarding1.png
+    - assets/spaghetti.jpg
+    - assets/chickencurry.jpg
+    - assets/applepie.jpg
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -78,9 +81,16 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Schyler
+    - family: Montserrat-Regular
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+    - family: Montserrat-Bold
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+    - family: Montserrat-Italic
+      fonts:
+        - asset: assets/fonts/Montserrat-Italic.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

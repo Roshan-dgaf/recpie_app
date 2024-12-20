@@ -18,9 +18,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // List of screens corresponding to each bottom navigation item
   final List<Widget> lstBottomScreen = [
     // Add your screens here
-    HomeScreen(),
+    const HomeScreen(),
     CartScreen(),
-    ProfileScreen(),
+    const ProfileScreen(),
     const AboutScreen(),
   ];
 
@@ -36,10 +36,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: const Text(
           "Dashboard",
-          style: TextStyle(color: Colors.white), // Set the text color to white
+          style: TextStyle(
+              fontFamily: 'Montserrat Bold Italic',
+              fontSize: 20,
+              color: Colors.white), // Set the text color to white
         ),
-        centerTitle: true,
-        backgroundColor: colorPrimary,
+        automaticallyImplyLeading: false, // Removes the default back button
       ),
       body: lstBottomScreen[_selectedIndex], // Display the selected screen
       bottomNavigationBar: BottomNavigationBar(
