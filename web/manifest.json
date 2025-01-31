@@ -1,6 +1,6 @@
 {
-    "name": "recpie_app",
-    "short_name": "recpie_app",
+    "name": "softwarica_student_management_bloc",
+    "short_name": "softwarica_student_management_bloc",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

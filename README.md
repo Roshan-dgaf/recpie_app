@@ -1,4 +1,4 @@
-# recpie_app
+# softwarica_student_management_bloc
 
 A new Flutter project.
 
