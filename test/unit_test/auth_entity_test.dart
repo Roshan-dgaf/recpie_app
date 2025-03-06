@@ -6,20 +6,20 @@ void main() {
     test('Two AuthEntity objects with same values should be equal', () {
       final auth1 = AuthEntity(
         userId: '123',
-        fName: 'John',
-        lName: 'Doe',
+        fName: 'Roshan',
+        lName: 'Baidar',
         image: 'image_url',
         phone: '9876543210',
-        username: 'johndoe',
+        username: 'RoshanBaidar',
         password: 'password123',
       );
       final auth2 = AuthEntity(
         userId: '123',
-        fName: 'John',
-        lName: 'Doe',
+        fName: 'Roshan',
+        lName: 'Baidar',
         image: 'image_url',
         phone: '9876543210',
-        username: 'johndoe',
+        username: 'RoshanBaidar',
         password: 'password123',
       );
       expect(auth1, equals(auth2));
@@ -28,20 +28,20 @@ void main() {
     test('Different AuthEntity objects should not be equal', () {
       final auth1 = AuthEntity(
         userId: '123',
-        fName: 'John',
-        lName: 'Doe',
+        fName: 'Roshan',
+        lName: 'Baidar',
         image: 'image_url',
         phone: '9876543210',
-        username: 'johndoe',
+        username: 'RoshanBaidar',
         password: 'password123',
       );
       final auth2 = AuthEntity(
         userId: '124',
-        fName: 'Jane',
-        lName: 'Smith',
+        fName: 'Samip',
+        lName: 'Subedi',
         image: 'another_image',
         phone: '1234567890',
-        username: 'janesmith',
+        username: 'SamipSubedi',
         password: 'securePass',
       );
       expect(auth1, isNot(equals(auth2)));
