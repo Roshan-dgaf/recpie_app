@@ -1,4 +1,4 @@
-# softwarica_student_management_bloc
+# recipe_app
 
 A new Flutter project.
 

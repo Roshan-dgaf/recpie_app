@@ -1,6 +1,6 @@
 {
-    "name": "softwarica_student_management_bloc",
-    "short_name": "softwarica_student_management_bloc",
+    "name": "recipe_app",
+    "short_name": "recipe_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
