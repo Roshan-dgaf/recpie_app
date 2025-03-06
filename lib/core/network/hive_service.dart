@@ -1,95 +1,215 @@
-import 'package:hive_flutter/hive_flutter.dart';
+// //esma table create update delete haru CRUD ko queries hunxa
+// import 'package:hive_flutter/adapters.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:recipe_app/app/constants/hive_table_constant.dart';
+// import 'package:recipe_app/feature/Product/data/model/product_hive_model.dart';
+// import 'package:recipe_app/feature/auth/data/model/auth_hive_model.dart';
+// import 'package:recipe_app/feature/order/data/model/order_hive_model.dart';
+
+// class HiveService {
+//   Future<void> init() async {
+//     var directory = await getApplicationDocumentsDirectory();
+//     var path = '${directory.path}recipe.db';
+
+//     Hive.init(path);
+//   }
+
+//   // Auth Queries
+//   Future<void> register(AuthHiveModel customer) async {
+//     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+//     await box.put(customer.customerId, customer);
+//   }
+
+//   Future<void> deleteAuth(String id) async {
+//     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+//     await box.delete(id);
+//   }
+
+//   Future<List<AuthHiveModel>> getAllAuth() async {
+//     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+//     return box.values.toList();
+//   }
+
+//   // (Batch) Product Queries
+
+//   Future<void> addProduct(ProductHiveModel product) async {
+//     var box =
+//         await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+//     await box.put(product.productId, product);
+//   }
+
+//   Future<void> deleteProduct(String id) async {
+//     var box =
+//         await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+//     await box.delete(id);
+//   }
+
+//   Future<List<ProductHiveModel>> getAllProduct() async {
+//     var box =
+//         await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+//     var products = box.values.toList();
+//     return products;
+//   }
+
+// // Order Queries
+//   Future<void> addOrder(OrderHiveModel order) async {
+//     var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+//     await box.put(order.orderId, order);
+//   }
+
+//   Future<void> deleteOrder(String id) async {
+//     var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+//     await box.delete(id);
+//   }
+
+//   Future<List<OrderHiveModel>> getAllOrder() async {
+//     var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+//     var order = box.values.toList();
+//     return order;
+//   }
+
+// // Customer Queries
+//   Future<void> addCustomer() async {}
+
+//   Future<void> deleteCustomer() async {
+//     await Hive.deleteBoxFromDisk(HiveTableConstant.customerBox);
+//   }
+
+//   Future<void> getAllCustomers() async {}
+
+//   Future<AuthHiveModel> loginCustomer(String username, String password) async {
+//     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+//     var customer = box.values.firstWhere((element) =>
+//         element.username == username && element.password == password);
+//     box.close();
+//     return customer;
+//   }
+// }
+
+import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:softwarica_student_management_bloc/app/constants/hive_table_constant.dart';
-import 'package:softwarica_student_management_bloc/features/auth/data/model/auth_hive_model.dart';
-import 'package:softwarica_student_management_bloc/features/batch/data/model/batch_hive_model.dart';
-import 'package:softwarica_student_management_bloc/features/course/data/model/course_hive_model.dart';
+import 'package:recipe_app/app/constants/hive_table_constant.dart';
+import 'package:recipe_app/feature/Product/data/model/product_hive_model.dart';
+import 'package:recipe_app/feature/auth/data/model/auth_hive_model.dart';
+import 'package:recipe_app/feature/order/data/model/order_hive_model.dart';
 
 class HiveService {
-  static Future<void> init() async {
-    // Initialize the database
+  // Initialize Hive
+  Future<void> init() async {
     var directory = await getApplicationDocumentsDirectory();
-    var path = '${directory.path}softwarica_student_management.db';
+    var path = '${directory.path}recipe.db';
 
     Hive.init(path);
-
-    // Register Adapters
-    Hive.registerAdapter(CourseHiveModelAdapter());
-    Hive.registerAdapter(BatchHiveModelAdapter());
-    Hive.registerAdapter(AuthHiveModelAdapter());
-  }
-
-  // Batch Queries
-  Future<void> addBatch(BatchHiveModel batch) async {
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    await box.put(batch.batchId, batch);
-  }
-
-  Future<void> deleteBatch(String id) async {
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    await box.delete(id);
-  }
-
-  Future<List<BatchHiveModel>> getAllBatches() async {
-    // Sort by BatchName
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    return box.values.toList()
-      ..sort((a, b) => a.batchName.compareTo(b.batchName));
-  }
-
-  // Course Queries
-  Future<void> addCourse(CourseHiveModel course) async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-    await box.put(course.courseId, course);
-  }
-
-  Future<void> deleteCourse(String id) async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-    await box.delete(id);
-  }
-
-  Future<List<CourseHiveModel>> getAllCourses() async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-    return box.values.toList();
   }
 
   // Auth Queries
-  Future<void> register(AuthHiveModel auth) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
-    await box.put(auth.studentId, auth);
+  Future<void> register(AuthHiveModel customer) async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    await box.put(customer.customerId, customer);
+  }
+
+  // Update Auth (Customer) Query
+  Future<void> updateAuth(AuthHiveModel customer) async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    await box.put(customer.customerId, customer);
   }
 
   Future<void> deleteAuth(String id) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
     await box.delete(id);
   }
 
   Future<List<AuthHiveModel>> getAllAuth() async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
     return box.values.toList();
   }
 
-  // Login using username and password
-  Future<AuthHiveModel?> login(String username, String password) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
-    var student = box.values.firstWhere((element) =>
+  Future<void> updateUser(AuthHiveModel user) async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    await box.put(user.customerId, user);
+  }
+
+  // Product Queries
+  Future<void> addProduct(ProductHiveModel product) async {
+    var box =
+        await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+    await box.put(product.productId, product);
+  }
+
+  // Update Product Query
+  Future<void> updateProduct(ProductHiveModel product) async {
+    var box =
+        await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+    await box.put(product.productId, product);
+  }
+
+  Future<void> deleteProduct(String id) async {
+    var box =
+        await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+    await box.delete(id);
+  }
+
+  Future<List<ProductHiveModel>> getAllProduct() async {
+    var box =
+        await Hive.openBox<ProductHiveModel>(HiveTableConstant.productBox);
+    var products = box.values.toList();
+    return products;
+  }
+
+  // Order Queries
+  Future<void> addOrder(OrderHiveModel order) async {
+    var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+    await box.put(order.orderId, order);
+  }
+
+  // Update Order Query
+  Future<void> updateOrder(OrderHiveModel order) async {
+    var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+    await box.put(order.orderId, order);
+  }
+
+  Future<void> deleteOrder(String id) async {
+    var box = await Hive.openBox<OrderHiveModel>(HiveTableConstant.orderBox);
+    await box.delete(id);
+  }
+
+  Future<List<OrderHiveModel>> getOrder(String userId) async {
+    try {
+      if (userId.isEmpty) {
+        throw Exception('Customer ID cannot be null or empty');
+      }
+
+      // Fetching orders for the given customerId from Hive or local database
+      final orderBox = await Hive.openBox<OrderHiveModel>('ordersBox');
+      final allOrders =
+          orderBox.values.where((order) => order.customerId == userId).toList();
+
+      return allOrders; // Return the list of orders for that customer
+    } catch (e) {
+      // Handle any errors that may occur
+      print('Error fetching orders: $e');
+      return []; // Return an empty list in case of error
+    }
+  }
+
+  // Customer Queries
+  Future<void> addCustomer() async {
+    // Add customer-related logic here if necessary
+  }
+
+  Future<void> deleteCustomer() async {
+    await Hive.deleteBoxFromDisk(HiveTableConstant.customerBox);
+  }
+
+  Future<List<AuthHiveModel>> getAllCustomers() async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    return box.values.toList();
+  }
+
+  Future<AuthHiveModel> loginCustomer(String username, String password) async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    var customer = box.values.firstWhere((element) =>
         element.username == username && element.password == password);
-    box.close();
-    return student;
-  }
-
-  Future<void> clearAll() async {
-    await Hive.deleteBoxFromDisk(HiveTableConstant.batchBox);
-    await Hive.deleteBoxFromDisk(HiveTableConstant.courseBox);
-    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
-  }
-
-  // Clear Student Box
-  Future<void> clearStudentBox() async {
-    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
-  }
-
-  Future<void> close() async {
-    await Hive.close();
+    return customer;
   }
 }

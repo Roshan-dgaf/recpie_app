@@ -26,5 +26,3 @@ class SharedPrefsFailure extends Failure {
     required super.message,
   });
 }
-
-
