@@ -11,7 +11,5 @@ void main() async {
 
   await initDependencies();
 
-  runApp(
-    App(),
-  );
+  runApp(App());
 }
