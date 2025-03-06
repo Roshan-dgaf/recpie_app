@@ -1,167 +1,219 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:softwarica_student_management_bloc/features/auth/domain/entity/auth_entity.dart';
+import 'package:recipe_app/feature/auth/domain/entity/auth_entity.dart';
 
 void main() {
-  group('AuthEntity Tests', () {
-    test('Two AuthEntity objects with same values should be equal', () {
-      final auth1 = AuthEntity(
-        userId: '123',
+  group('AuthEntity', () {
+    test('should create an AuthEntity instance with required fields', () {
+      const authEntity = AuthEntity(
         fName: 'Roshan',
         lName: 'Baidar',
-        image: 'image_url',
-        phone: '9876543210',
-        username: 'RoshanBaidar',
-        password: 'password123',
+        email: 'RoshanBaidar17@gmail.com',
+        phoneNo: '123456789',
+        address: 'Banepa',
+        username: 'Roshan',
+        password: '12345',
       );
-      final auth2 = AuthEntity(
-        userId: '123',
-        fName: 'Roshan',
-        lName: 'Baidar',
-        image: 'image_url',
-        phone: '9876543210',
-        username: 'RoshanBaidar',
-        password: 'password123',
-      );
-      expect(auth1, equals(auth2));
+
+      expect(authEntity.fName, 'Roshan');
+      expect(authEntity.lName, 'Baidar');
+      expect(authEntity.email, 'RoshanBaidar17@gmail.com');
+      expect(authEntity.phoneNo, '123456789');
+      expect(authEntity.address, 'Banepa');
+      expect(authEntity.username, 'Roshan');
+      expect(authEntity.password, '12345');
+      expect(authEntity.image, isNull);
+      expect(authEntity.userId, isNull);
     });
 
-    test('Different AuthEntity objects should not be equal', () {
-      final auth1 = AuthEntity(
-        userId: '123',
-        fName: 'Roshan',
-        lName: 'Baidar',
-        image: 'image_url',
-        phone: '9876543210',
-        username: 'RoshanBaidar',
+    test('should handle nullable fields for userId and image', () {
+      const authEntity = AuthEntity(
+        fName: 'Rojan',
+        lName: 'Banepa',
+        email: 'rojanbaidar@gmail.com',
+        phoneNo: '987654321',
+        address: 'Banepa',
+        username: 'Rojan',
+        password: '1234',
+      );
+
+      expect(authEntity.userId, isNull);
+      expect(authEntity.image, isNull);
+    });
+
+    test('should compare equal for two identical instances', () {
+      const authEntity1 = AuthEntity(
+        fName: 'Kiran',
+        lName: 'Karmacharya',
+        email: 'krma@gmail.com',
+        phoneNo: '123456789',
+        address: 'Chandeswori',
+        username: 'Kiran',
+        password: 'password999',
+      );
+
+      const authEntity2 = AuthEntity(
+        fName: 'Kiran',
+        lName: 'Karmacharya',
+        email: 'kiranshrestha@gmail.com',
+        phoneNo: '123456789',
+        address: 'Chandeswori',
+        username: 'Kiran',
+        password: 'pasword999',
+      );
+
+      expect(authEntity1, equals(authEntity2));
+    });
+
+    test('should compare not equal for different instances', () {
+      const authEntity1 = AuthEntity(
+        fName: 'Sujan',
+        lName: 'Sapkota',
+        email: 'sujann@gmail.com',
+        phoneNo: '123456789',
+        address: 'Banepa',
+        username: 'sujan',
         password: 'password123',
       );
-      final auth2 = AuthEntity(
+
+      const authEntity2 = AuthEntity(
+        fName: 'Jane',
+        lName: 'Doe',
+        email: 'jane.doe@example.com',
+        phoneNo: '987654321',
+        address: '456 Another St',
+        username: 'janedoe',
+        password: 'password456',
+      );
+
+      expect(authEntity1, isNot(equals(authEntity2)));
+    });
+
+    test('should ensure equality for userId field', () {
+      const authEntity1 = AuthEntity(
+        userId: '123',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
+      );
+
+      const authEntity2 = AuthEntity(
+        userId: '123',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
+      );
+
+      expect(authEntity1, equals(authEntity2));
+    });
+
+    test('should ensure inequality for userId field', () {
+      const authEntity1 = AuthEntity(
+        userId: '123',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
+      );
+
+      const authEntity2 = AuthEntity(
         userId: '124',
-        fName: 'Samip',
-        lName: 'Subedi',
-        image: 'another_image',
-        phone: '1234567890',
-        username: 'SamipSubedi',
-        password: 'securePass',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
       );
-      expect(auth1, isNot(equals(auth2)));
+
+      expect(authEntity1, isNot(equals(authEntity2)));
     });
 
-    test('AuthEntity should allow null userId', () {
-      final auth = AuthEntity(
-        userId: null,
-        fName: 'Alice',
-        lName: 'Brown',
-        image: 'avatar.png',
-        phone: '1112223333',
-        username: 'alicebrown',
-        password: 'mypassword',
+    test('should ensure equality for image field', () {
+      const authEntity1 = AuthEntity(
+        image: 'profile1.jpg',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
       );
-      expect(auth.userId, isNull);
+
+      const authEntity2 = AuthEntity(
+        image: 'profile1.jpg',
+        fName: 'John',
+        lName: 'Doe',
+        email: 'john.doe@example.com',
+        phoneNo: '123456789',
+        address: '123 Main St',
+        username: 'johndoe',
+        password: 'password123',
+      );
+
+      expect(authEntity1, equals(authEntity2));
     });
 
-    test('AuthEntity props should contain all properties', () {
-      final auth = AuthEntity(
-        userId: '456',
-        fName: 'Bob',
-        lName: 'Marley',
-        image: 'bob.jpg',
-        phone: '4445556666',
-        username: 'bobmarley',
-        password: 'reggae123',
-      );
-      expect(
-          auth.props,
-          containsAll([
-            auth.userId,
-            auth.fName,
-            auth.lName,
-            auth.image,
-            auth.phone,
-            auth.username,
-            auth.password
-          ]));
-    });
-
-    test('AuthEntity username should not be empty', () {
-      final auth = AuthEntity(
-        userId: '789',
-        fName: 'Charlie',
-        lName: 'Chaplin',
-        image: 'charlie.png',
-        phone: '9998887777',
+    test('should handle empty strings for all fields', () {
+      const authEntity = AuthEntity(
+        fName: '',
+        lName: '',
+        email: '',
+        phoneNo: '',
+        address: '',
         username: '',
-        password: 'silentpass',
-      );
-      expect(auth.username.isEmpty, isTrue);
-    });
-
-    test('AuthEntity password should not be null', () {
-      final auth = AuthEntity(
-        userId: '321',
-        fName: 'David',
-        lName: 'Gilmour',
-        image: 'david.jpg',
-        phone: '7776665555',
-        username: 'davidg',
-        password: 'pinkfloyd',
-      );
-      expect(auth.password, isNotNull);
-    });
-
-    test('AuthEntity phone should contain only digits', () {
-      final auth = AuthEntity(
-        userId: '654',
-        fName: 'Eva',
-        lName: 'Green',
-        image: 'eva.jpg',
-        phone: '1234567890', // Expected value
-        username: 'evagreen',
-        password: 'strongpass',
+        password: '',
       );
 
-      print('Phone value: ${auth.phone}'); // Debugging output
-
-      expect(auth.phone, matches(RegExp(r'^\d+$'))); // Should pass
+      expect(authEntity.fName, '');
+      expect(authEntity.lName, '');
+      expect(authEntity.email, '');
+      expect(authEntity.phoneNo, '');
+      expect(authEntity.address, '');
+      expect(authEntity.username, '');
+      expect(authEntity.password, '');
     });
 
-    test('AuthEntity fName should not be null', () {
-      final auth = AuthEntity(
-        userId: '963',
-        fName: 'Frank',
-        lName: 'Ocean',
-        image: 'frank.png',
-        phone: '1231231234',
-        username: 'franko',
-        password: 'channelorange',
-      );
-      expect(auth.fName, isNotNull);
-    });
-
-    test('AuthEntity lName should not be null', () {
-      final auth = AuthEntity(
-        userId: '753',
-        fName: 'Grace',
-        lName: 'Jones',
-        image: 'grace.jpg',
-        phone: '3213214321',
-        username: 'gracej',
-        password: 'nightclubbing',
-      );
-      expect(auth.lName, isNotNull);
-    });
-
-    test('AuthEntity image should allow null value', () {
-      final auth = AuthEntity(
-        userId: '852',
-        fName: 'Hank',
-        lName: 'Moody',
+    test('should handle null values for optional fields', () {
+      const authEntity = AuthEntity(
+        fName: 'Alice',
+        lName: 'Smith',
+        email: 'alice.smith@example.com',
+        phoneNo: '987654321',
+        address: '789 Some St',
+        username: 'alicesmith',
+        password: 'password789',
         image: null,
-        phone: '9879879870',
-        username: 'hankmoody',
-        password: 'californication',
       );
-      expect(auth.image, isNull);
+
+      expect(authEntity.image, isNull);
+    });
+
+    test('should handle instance creation with a userId', () {
+      const authEntity = AuthEntity(
+        userId: '1001',
+        fName: 'Bob',
+        lName: 'Brown',
+        email: 'bob.brown@example.com',
+        phoneNo: '1122334455',
+        address: '101 Some St',
+        username: 'bobbrown',
+        password: 'securepassword',
+      );
+
+      expect(authEntity.userId, '1001');
     });
   });
 }

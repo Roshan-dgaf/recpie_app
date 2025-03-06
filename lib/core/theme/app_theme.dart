@@ -1,79 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:softwarica_student_management_bloc/app/constants/theme_constant.dart';
 
-class AppTheme {
-  AppTheme._();
-
-  static getApplicationTheme({required bool isDarkMode}) {
-    return ThemeData(
-      // change the theme according to the user preference
-      colorScheme: isDarkMode
-          ? const ColorScheme.dark(
-              primary: ThemeConstant.darkPrimaryColor,
-            )
-          : const ColorScheme.light(
-              primary: Color.fromARGB(255, 17, 119, 20),
-            ),
-      brightness: isDarkMode ? Brightness.dark : Brightness.light,
-      fontFamily: 'Montserrat',
-      useMaterial3: true,
-
-      // Change app bar color
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-        backgroundColor: ThemeConstant.appBarColor,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
+ThemeData getApplicationTheme() {
+  return ThemeData(
+    fontFamily: 'Montserrat Bold',
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        textStyle: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Montserrat Bold',
+            fontWeight: FontWeight.bold),
+        backgroundColor: Colors.orange,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
         ),
       ),
-
-      // Change elevated button theme
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          foregroundColor: Colors.white,
-          backgroundColor: ThemeConstant.primaryColor,
-          textStyle: const TextStyle(
-            fontSize: 20,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      contentPadding: EdgeInsets.all(15),
+      border: OutlineInputBorder(),
+      labelStyle: TextStyle(
+        fontSize: 20,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.red,
         ),
       ),
-
-      // Change text field theme
-      inputDecorationTheme: const InputDecorationTheme(
-        contentPadding: EdgeInsets.all(15),
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(
-          fontSize: 20,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.red,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeConstant.primaryColor,
-          ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.black,
         ),
       ),
-      // Circular progress bar theme
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: ThemeConstant.primaryColor,
-      ),
-      //Bottom navigation bar theme
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.lightGreen,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-      ),
-    );
-  }
+    ),
+  );
 }
